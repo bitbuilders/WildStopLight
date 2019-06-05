@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,9 +22,12 @@ public class LightBrain : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) m_Light = new Green();
-        if (Input.GetKeyDown(KeyCode.Alpha2)) m_Light = new Yellow();
-        if (Input.GetKeyDown(KeyCode.Alpha3)) m_Light = new Red();
+        if (Input.GetKeyDown(KeyCode.Alpha1) && ValidSwap(typeof(Green)))
+            m_Light = new Green();
+        if (Input.GetKeyDown(KeyCode.Alpha2) && ValidSwap(typeof(Yellow)))
+            m_Light = new Yellow();
+        if (Input.GetKeyDown(KeyCode.Alpha3) && ValidSwap(typeof(Red)))
+            m_Light = new Red();
 
         GreenLight.enabled = false;
         YellowLight.enabled = false;
@@ -32,5 +36,10 @@ public class LightBrain : MonoBehaviour
         Light newLight = m_Light.Do(this);
 
         if (newLight != null) m_Light = newLight;
+    }
+
+    bool ValidSwap(Type next)
+    {
+        return m_Light.Next == next;
     }
 }

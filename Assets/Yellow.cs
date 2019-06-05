@@ -6,6 +6,11 @@ public class Yellow : Light
 {
     float m_Speed = 2.0f;
 
+    public Yellow()
+    {
+        Next = typeof(Red);
+    }
+
     public override Light Do(LightBrain brain)
     {
         brain.YellowLight.enabled = true;
