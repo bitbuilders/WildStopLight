@@ -15,7 +15,8 @@ public class Green : Light
     {
         brain.GreenLight.enabled = true;
 
-        brain.Time -= Time.deltaTime * m_Speed;
+        brain.Time -= Time.unscaledDeltaTime * m_Speed;
+        
         if (brain.Time <= 0.0f)
         {
             brain.Time = brain.StartTime;
